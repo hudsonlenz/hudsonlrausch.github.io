@@ -1,887 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- ============================================================
-       META TAGS — SEO e Configurações Básicas
-  ============================================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfólio de Hudson Lenz Rausch — Data Analyst & BI Developer especializada em SQL, BigQuery, Tableau e Power BI." />
-  <meta name="keywords" content="data analyst, BI developer, SQL, BigQuery, Tableau, Power BI, portfólio" />
-  <meta name="author" content="Hudson L. Rausch" />
-
-  <!-- Open Graph (compartilhamento em redes sociais) -->
-  <meta property="og:title" content="Hudson L. Rausch — Data Analyst & BI Developer" />
-  <meta property="og:description" content="Transformando dados em decisões estratégicas." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://seu-usuario.github.io" />
 
   <title>Hudson L. Rausch — Data Analyst & BI Developer</title>
 
-  <!-- ============================================================
-       FONTES — Google Fonts
-       DM Serif Display: elegante para títulos
-       DM Sans: clean para corpo de texto
-  ============================================================ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
-
-  <!-- ============================================================
-       FONT AWESOME — Ícones
-  ============================================================ -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- ============================================================
-       CSS PRINCIPAL
-  ============================================================ -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
 
-  <!-- ============================================================
-       CURSOR PERSONALIZADO
-  ============================================================ -->
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
+<!-- HEADER -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
 
-  <!-- ============================================================
-       LOADER DE ENTRADA
-  ============================================================ -->
-  <div class="page-loader" id="pageLoader" aria-hidden="true">
-    <div class="loader-content">
-      <span class="loader-text">HLR</span>
-      <div class="loader-bar"></div>
-    </div>
-  </div>
+    <a href="#hero" class="nav-logo">
+      <span class="logo-initials">HLR</span>
+      <span class="logo-name">Hudson L. Rausch</span>
+    </a>
 
-  <!-- ============================================================
-       HEADER / NAVBAR
-       - Fixo no topo com blur no scroll
-       - Toggle dark/light mode
-  ============================================================ -->
-  <header class="navbar" id="navbar" role="banner">
-    <div class="nav-container">
-      <!-- Logo / Nome -->
-      <a href="#hero" class="nav-logo" aria-label="Ir para o início">
-        <span class="logo-initials">HLR</span>
-        <span class="logo-name">Hudson L. Rausch</span>
-      </a>
-
-      <!-- Menu de Navegação (Desktop) -->
-      <nav class="nav-menu" role="navigation" aria-label="Menu principal">
-        <ul class="nav-list">
-          <li><a href="#about"    class="nav-link" data-text="Sobre">Sobre</a></li>
-          <li><a href="#skills"   class="nav-link" data-text="Skills">Skills</a></li>
-          <li><a href="#projects" class="nav-link" data-text="Projetos">Projetos</a></li>
-          <li><a href="#contact"  class="nav-link" data-text="Contato">Contato</a></li>
-        </ul>
-      </nav>
-
-      <!-- Controles do Header -->
-      <div class="nav-controls">
-        <!-- Toggle Dark/Light Mode -->
-        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro" title="Alternar tema">
-          <i class="fas fa-sun"  id="iconSun"  aria-hidden="true"></i>
-          <i class="fas fa-moon" id="iconMoon" aria-hidden="true"></i>
-        </button>
-
-        <!-- Hamburguer Mobile -->
-        <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
-          <span class="ham-line"></span>
-          <span class="ham-line"></span>
-          <span class="ham-line"></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Menu Mobile (dropdown) -->
-    <nav class="nav-mobile" id="navMobile" aria-hidden="true" role="navigation" aria-label="Menu mobile">
-      <ul class="nav-mobile-list">
-        <li><a href="#about"    class="nav-mobile-link">Sobre</a></li>
-        <li><a href="#skills"   class="nav-mobile-link">Skills</a></li>
-        <li><a href="#projects" class="nav-mobile-link">Projetos</a></li>
-        <li><a href="#contact"  class="nav-mobile-link">Contato</a></li>
+    <nav class="nav-menu">
+      <ul class="nav-list">
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projetos</a></li>
+        <li><a href="#contact">Contato</a></li>
       </ul>
     </nav>
-  </header>
 
-  <!-- ============================================================
-       INDICADOR DE PROGRESSO DE SCROLL
-  ============================================================ -->
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    <div class="nav-controls">
+      <!-- BOTÃO IDIOMA -->
+      <button id="langToggle" class="lang-toggle">EN</button>
 
-  <!-- ============================================================
-       HERO SECTION
-       - Foto/Avatar, nome, título, descrição e CTAs
-  ============================================================ -->
-  <section class="hero" id="hero" aria-label="Apresentação">
-    <!-- Ruído de fundo decorativo -->
-    <div class="hero-noise" aria-hidden="true"></div>
-
-    <!-- Grade decorativa -->
-    <div class="hero-grid" aria-hidden="true"></div>
-
-    <!-- Elementos flutuantes decorativos -->
-    <div class="hero-orb hero-orb--1" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb--2" aria-hidden="true"></div>
-
-    <div class="hero-container">
-      <!-- Coluna de texto -->
-      <div class="hero-content">
-        <p class="hero-eyebrow reveal-item">
-          <span class="eyebrow-line" aria-hidden="true"></span>
-          Disponível para projetos
-        </p>
-
-        <h1 class="hero-title reveal-item">
-          Olá, eu sou<br />
-          <em class="hero-name">Hudson L. Rausch</em>
-        </h1>
-
-        <p class="hero-subtitle reveal-item">
-          Data Analyst <span class="subtitle-sep" aria-hidden="true">·</span> BI Developer
-        </p>
-
-        <p class="hero-description reveal-item">
-          Transformo dados brutos em narrativas estratégicas.<br />
-          Especialista em <strong>SQL</strong>, <strong>BigQuery</strong>, <strong>Tableau</strong> e <strong>Power BI</strong> — construindo dashboards que aceleram decisões.
-        </p>
-
-        <!-- Botões de CTA -->
-        <div class="hero-actions reveal-item">
-          <a href="https://github.com/hudsonlenz" target="_blank" rel="noopener noreferrer"
-             class="btn btn--primary" aria-label="Perfil no GitHub">
-            <i class="fab fa-github" aria-hidden="true"></i>
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/hudsonrausch/" target="_blank" rel="noopener noreferrer"
-             class="btn btn--ghost" aria-label="Perfil no LinkedIn">
-            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-            LinkedIn
-          </a>
-          <a href="#contact" class="btn btn--ghost" aria-label="Ir para seção de contato">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-            Contato
-          </a>
-        </div>
-
-        <!-- Estatísticas rápidas -->
-        <div class="hero-stats reveal-item">
-          <div class="stat-item">
-            <span class="stat-number" data-count="5">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Anos de exp.</span>
-          </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat-item">
-            <span class="stat-number" data-count="30">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Projetos</span>
-          </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat-item">
-            <span class="stat-number" data-count="15">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Clientes</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Coluna do avatar -->
-      <div class="hero-visual reveal-item">
-        <div class="avatar-frame" aria-hidden="true">
-          <div class="avatar-placeholder" aria-label="Foto de perfil de Hudson L. Rausch">
-            <img src="img/foto.jpg" alt="Hudson L. Rausch">
-              <!-- Corpo -->
-              <circle cx="100" cy="75" r="38" fill="currentColor" opacity="0.9"/>
-              <ellipse cx="100" cy="155" rx="55" ry="38" fill="currentColor" opacity="0.7"/>
-            </svg>
-            <span class="avatar-initials" aria-hidden="true">HLR</span>
-          </div>
-          <!-- Badges flutuantes -->
-          <div class="avatar-badge avatar-badge--tl" aria-hidden="true">
-            <i class="fas fa-database"></i>
-            <span>SQL</span>
-          </div>
-          <div class="avatar-badge avatar-badge--br" aria-hidden="true">
-            <i class="fas fa-chart-bar"></i>
-            <span>BI</span>
-          </div>
-        </div>
-      </div>
+      <!-- TEMA -->
+      <button id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
 
-    <!-- Seta de scroll -->
-    <a href="#about" class="hero-scroll-cta" aria-label="Rolar para a seção Sobre mim">
-      <span class="scroll-cta-text">Role para baixo</span>
-      <span class="scroll-cta-arrow" aria-hidden="true">
-        <i class="fas fa-chevron-down"></i>
-      </span>
-    </a>
-  </section>
+  </div>
+</header>
 
-  <!-- ============================================================
-       SOBRE MIM
-  ============================================================ -->
-  <section class="about section" id="about" aria-label="Sobre mim">
-    <div class="container">
-      <!-- Cabeçalho da seção -->
-      <div class="section-header reveal-item">
-        <span class="section-tag">01 — Sobre</span>
-        <h2 class="section-title">Quem sou eu</h2>
-      </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-container">
 
-      <div class="about-grid">
-        <!-- Texto -->
-        <div class="about-text reveal-item">
-          <p class="about-lead">
-            Sou um profissional de dados com forte atuação em BI e engenharia de dados, especializado em transformar grandes volumes de informação em insights estratégicos e acionáveis.
-          </p>
-          <p>
-            Tenho experiência sólida em modelagem de dados, otimização de queries em BigQuery e construção de pipelines eficientes. Atuo conectando dados às necessidades do negócio por meio de dashboards e análises que direcionam decisões estratégicas.
-          </p>
-          <p>
-            Hoje atuo com foco em <strong>Business Intelligence</strong>, utilizando ferramentas como SQL, BigQuery, Power BI e Tableau para desenvolver soluções analíticas robustas, com foco em performance, escalabilidade e geração de valor para o negócio.
-          </p>
+    <div class="hero-content">
 
-          <!-- Download CV -->
-          <a href="#" class="btn btn--primary about-cta" aria-label="Baixar currículo em PDF">
-            <i class="fas fa-download" aria-hidden="true"></i>
-            Baixar Currículo
-          </a>
-        </div>
+      <h1 id="heroTitle" class="hero-title reveal-item">
+  Olá, eu sou<br />
+  <em class="hero-name">Hudson L. Rausch</em>
+      </h1>
 
-        <!-- Cards de destaques -->
-        <div class="about-highlights">
-          <div class="highlight-card reveal-item">
-            <div class="highlight-icon" aria-hidden="true">
-              <i class="fas fa-database"></i>
-            </div>
-            <h3>Engenharia de Dados</h3>
-            <p>Modelagem dimensional, pipelines ETL/ELT e otimização de queries em ambientes cloud.</p>
-          </div>
+      <p id="heroDesc" class="hero-description reveal-item">
+  Transformo dados brutos em narrativas estratégicas.<br />
+  Especialista em <strong>SQL</strong>, <strong>BigQuery</strong>, <strong>Tableau</strong> e <strong>Power BI</strong> — construindo dashboards que aceleram decisões.
+      </p>
 
-          <div class="highlight-card reveal-item">
-            <div class="highlight-icon" aria-hidden="true">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>Análise & BI</h3>
-            <p>Dashboards executivos, KPIs estratégicos e storytelling com dados para tomada de decisão.</p>
-          </div>
-
-          <div class="highlight-card reveal-item">
-            <div class="highlight-icon" aria-hidden="true">
-              <i class="fas fa-cloud"></i>
-            </div>
-            <h3>Cloud & BigQuery</h3>
-            <p>Processamento de grandes volumes de dados no Google Cloud Platform com alta performance.</p>
-          </div>
-
-          <div class="highlight-card reveal-item">
-            <div class="highlight-icon" aria-hidden="true">
-              <i class="fas fa-brain"></i>
-            </div>
-            <h3>Analytics Avançado</h3>
-            <p>Análises estatísticas, forecasting e integração com modelos de machine learning.</p>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- ============================================================
-       SKILLS / HABILIDADES
-  ============================================================ -->
-  <section class="skills section section--alt" id="skills" aria-label="Habilidades técnicas">
-    <div class="container">
-      <!-- Cabeçalho -->
-      <div class="section-header reveal-item">
-        <span class="section-tag">02 — Skills</span>
-        <h2 class="section-title">Ferramentas & Tecnologias</h2>
-      </div>
-
-      <!-- Grid de ícones de tecnologias -->
-      <div class="skills-icons-grid reveal-item">
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <!-- SQL -->
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="48" rx="10" fill="currentColor" opacity="0.1"/>
-              <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor" font-family="monospace">SQL</text>
-            </svg>
-          </div>
-          <span class="skill-icon-label">SQL</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fab fa-google" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">BigQuery</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fas fa-chart-bar" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">Power BI</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fas fa-table-cells" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">Tableau</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fab fa-python" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">Python</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fas fa-cloud" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">GCP</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fas fa-cubes" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">dbt</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fas fa-diagram-project" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">Looker</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fab fa-git-alt" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">Git</span>
-        </div>
-
-        <div class="skill-icon-card">
-          <div class="skill-icon-wrap" aria-hidden="true">
-            <i class="fas fa-wind" style="font-size:1.8rem"></i>
-          </div>
-          <span class="skill-icon-label">Airflow</span>
-        </div>
-
-      </div>
-
-      <!-- Barras de progresso animadas -->
-      <div class="skills-bars">
-        <h3 class="skills-bars-title reveal-item">Nível de Proficiência</h3>
-
-        <div class="skill-bar-item reveal-item">
-          <div class="skill-bar-header">
-            <span class="skill-bar-name">SQL / BigQuery</span>
-            <span class="skill-bar-pct">95%</span>
-          </div>
-          <div class="skill-bar-track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="SQL e BigQuery: 95%">
-            <div class="skill-bar-fill" data-width="95"></div>
-          </div>
-        </div>
-
-        <div class="skill-bar-item reveal-item">
-          <div class="skill-bar-header">
-            <span class="skill-bar-name">Power BI</span>
-            <span class="skill-bar-pct">92%</span>
-          </div>
-          <div class="skill-bar-track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="Power BI: 92%">
-            <div class="skill-bar-fill" data-width="92"></div>
-          </div>
-        </div>
-
-        <div class="skill-bar-item reveal-item">
-          <div class="skill-bar-header">
-            <span class="skill-bar-name">Tableau</span>
-            <span class="skill-bar-pct">88%</span>
-          </div>
-          <div class="skill-bar-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Tableau: 88%">
-            <div class="skill-bar-fill" data-width="88"></div>
-          </div>
-        </div>
-
-        <div class="skill-bar-item reveal-item">
-          <div class="skill-bar-header">
-            <span class="skill-bar-name">Python (Pandas / NumPy)</span>
-            <span class="skill-bar-pct">80%</span>
-          </div>
-          <div class="skill-bar-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Python: 80%">
-            <div class="skill-bar-fill" data-width="80"></div>
-          </div>
-        </div>
-
-        <div class="skill-bar-item reveal-item">
-          <div class="skill-bar-header">
-            <span class="skill-bar-name">dbt / Data Modeling</span>
-            <span class="skill-bar-pct">75%</span>
-          </div>
-          <div class="skill-bar-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="dbt e Data Modeling: 75%">
-            <div class="skill-bar-fill" data-width="75"></div>
-          </div>
-        </div>
-
-        <div class="skill-bar-item reveal-item">
-          <div class="skill-bar-header">
-            <span class="skill-bar-name">Google Cloud Platform</span>
-            <span class="skill-bar-pct">78%</span>
-          </div>
-          <div class="skill-bar-track" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="GCP: 78%">
-            <div class="skill-bar-fill" data-width="78"></div>
-          </div>
-        </div>
-      </div>
+    <div class="hero-visual">
+      <div class="avatar-placeholder" aria-label="Foto de perfil de Hudson L. Rausch">
+  <img src="img/foto.jpg" alt="Hudson L. Rausch">
+</div>
     </div>
-  </section>
 
-  <!-- ============================================================
-       PROJETOS
-  ============================================================ -->
-  <section class="projects section" id="projects" aria-label="Projetos em destaque">
-    <div class="container">
-      <!-- Cabeçalho -->
-      <div class="section-header reveal-item">
-        <span class="section-tag">03 — Projetos</span>
-        <h2 class="section-title">Trabalhos em Destaque</h2>
-      </div>
+  </div>
+</section>
 
-      <!-- Grid de projetos -->
-      <div class="projects-grid">
+<!-- SOBRE -->
+<section class="about" id="about">
 
-        <!-- Projeto 1 -->
-        <article class="project-card reveal-item" aria-label="Projeto: Dashboard Executivo de Vendas">
-          <div class="project-card-inner">
-            <!-- Preview visual do projeto -->
-            <div class="project-preview" aria-hidden="true">
-              <div class="project-preview-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <div class="project-preview-bg"></div>
-            </div>
+  <h2>Sobre</h2>
 
-            <div class="project-content">
-              <div class="project-meta">
-                <span class="project-category">Power BI · Análise de Vendas</span>
-                <a href="https://github.com/hudsonlenz/projeto-vendas" target="_blank" rel="noopener noreferrer"
-                   class="project-github-link" aria-label="Ver código no GitHub">
-                  <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-              </div>
+  <p id="aboutLead" class="about-lead">
+    Sou um profissional de dados com forte atuação em BI e engenharia de dados.
+  </p>
 
-              <h3 class="project-title">Dashboard Executivo de Vendas</h3>
+  <p id="aboutText1">
+    Tenho experiência sólida em modelagem de dados, otimização de queries em BigQuery e construção de pipelines.
+  </p>
 
-              <p class="project-description">
-                Dashboard interativo de alta complexidade no Power BI para análise de vendas regionais, acompanhamento de metas e forecasting mensal. Processamento de +5M de registros com DAX otimizado.
-              </p>
+  <p id="aboutText2">
+    Hoje atuo com foco em Business Intelligence, desenvolvendo dashboards estratégicos.
+  </p>
 
-              <div class="project-tags" aria-label="Tecnologias usadas">
-                <span class="tag">Power BI</span>
-                <span class="tag">DAX</span>
-                <span class="tag">SQL Server</span>
-                <span class="tag">ETL</span>
-              </div>
+</section>
 
-              <a href="https://github.com/hudsonlenz/projeto-vendas" target="_blank" rel="noopener noreferrer"
-                 class="project-cta" aria-label="Ver projeto completo no GitHub">
-                Ver Projeto
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <h2>Skills</h2>
+  <p>SQL, BigQuery, Power BI, Tableau, Python, GCP</p>
+</section>
 
-        <!-- Projeto 2 -->
-        <article class="project-card reveal-item" aria-label="Projeto: Pipeline BigQuery + dbt">
-          <div class="project-card-inner">
-            <div class="project-preview" aria-hidden="true">
-              <div class="project-preview-icon">
-                <i class="fas fa-stream"></i>
-              </div>
-              <div class="project-preview-bg"></div>
-            </div>
+<!-- PROJETOS -->
+<section class="projects" id="projects">
+  <h2>Projetos</h2>
+  <p>Em breve...</p>
+</section>
 
-            <div class="project-content">
-              <div class="project-meta">
-                <span class="project-category">BigQuery · Engenharia de Dados</span>
-                <a href="https://github.com/hudsonlenz/pipeline-bigquery" target="_blank" rel="noopener noreferrer"
-                   class="project-github-link" aria-label="Ver código no GitHub">
-                  <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-              </div>
+<!-- CONTATO -->
+<section class="contact" id="contact">
 
-              <h3 class="project-title">Pipeline ELT com BigQuery & dbt</h3>
+  <h2>Contato</h2>
 
-              <p class="project-description">
-                Pipeline de dados escalável integrando fontes heterogêneas ao BigQuery via dbt. Modelagem dimensional em estrela com testes automatizados, documentação e orquestração via Airflow.
-              </p>
+  <p id="contactText" class="contact-lead">
+    Estou aberto a novos projetos, oportunidades e desafios na área de dados. Vamos conversar!
+  </p>
 
-              <div class="project-tags" aria-label="Tecnologias usadas">
-                <span class="tag">BigQuery</span>
-                <span class="tag">dbt</span>
-                <span class="tag">Airflow</span>
-                <span class="tag">GCP</span>
-              </div>
+</section>
 
-              <a href="https://github.com/hudsonlenz/pipeline-bigquery" target="_blank" rel="noopener noreferrer"
-                 class="project-cta" aria-label="Ver projeto completo no GitHub">
-                Ver Projeto
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
+<script src="script.js"></script>
 
-        <!-- Projeto 3 -->
-        <article class="project-card reveal-item" aria-label="Projeto: Análise de Churn com Python">
-          <div class="project-card-inner">
-            <div class="project-preview" aria-hidden="true">
-              <div class="project-preview-icon">
-                <i class="fab fa-python"></i>
-              </div>
-              <div class="project-preview-bg"></div>
-            </div>
-
-            <div class="project-content">
-              <div class="project-meta">
-                <span class="project-category">Python · Analytics Avançado</span>
-                <a href="https://github.com/hudsonlenz/analise-churn" target="_blank" rel="noopener noreferrer"
-                   class="project-github-link" aria-label="Ver código no GitHub">
-                  <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-              </div>
-
-              <h3 class="project-title">Análise Preditiva de Churn</h3>
-
-              <p class="project-description">
-                Modelo preditivo de churn de clientes utilizando Python (scikit-learn), com feature engineering, SHAP values para explicabilidade e visualizações no Tableau para comunicação aos stakeholders.
-              </p>
-
-              <div class="project-tags" aria-label="Tecnologias usadas">
-                <span class="tag">Python</span>
-                <span class="tag">Scikit-learn</span>
-                <span class="tag">Tableau</span>
-                <span class="tag">SHAP</span>
-              </div>
-
-              <a href="https://github.com/hudsonlenz/analise-churn" target="_blank" rel="noopener noreferrer"
-                 class="project-cta" aria-label="Ver projeto completo no GitHub">
-                Ver Projeto
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Projeto 4 -->
-        <article class="project-card reveal-item" aria-label="Projeto: BI Financeiro com Tableau">
-          <div class="project-card-inner">
-            <div class="project-preview" aria-hidden="true">
-              <div class="project-preview-icon">
-                <i class="fas fa-money-bill-trend-up"></i>
-              </div>
-              <div class="project-preview-bg"></div>
-            </div>
-
-            <div class="project-content">
-              <div class="project-meta">
-                <span class="project-category">Tableau · Finanças</span>
-                <a href="https://github.com/hudsonlenz/bi-financeiro" target="_blank" rel="noopener noreferrer"
-                   class="project-github-link" aria-label="Ver código no GitHub">
-                  <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-              </div>
-
-              <h3 class="project-title">BI Financeiro Integrado</h3>
-
-              <p class="project-description">
-                Suite de dashboards financeiros no Tableau com drill-down hierárquico, análise de DRE, fluxo de caixa e indicadores de margem. Conexão live ao BigQuery com atualização em tempo real.
-              </p>
-
-              <div class="project-tags" aria-label="Tecnologias usadas">
-                <span class="tag">Tableau</span>
-                <span class="tag">BigQuery</span>
-                <span class="tag">SQL</span>
-                <span class="tag">Finance</span>
-              </div>
-
-              <a href="https://github.com/hudsonlenz/bi-financeiro" target="_blank" rel="noopener noreferrer"
-                 class="project-cta" aria-label="Ver projeto completo no GitHub">
-                Ver Projeto
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Projeto 5 -->
-        <article class="project-card reveal-item" aria-label="Projeto: Data Lake no GCP">
-          <div class="project-card-inner">
-            <div class="project-preview" aria-hidden="true">
-              <div class="project-preview-icon">
-                <i class="fas fa-layer-group"></i>
-              </div>
-              <div class="project-preview-bg"></div>
-            </div>
-
-            <div class="project-content">
-              <div class="project-meta">
-                <span class="project-category">GCP · Arquitetura de Dados</span>
-                <a href="https://github.com/hudsonlenz/data-lake-gcp" target="_blank" rel="noopener noreferrer"
-                   class="project-github-link" aria-label="Ver código no GitHub">
-                  <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-              </div>
-
-              <h3 class="project-title">Data Lake Medallion no GCP</h3>
-
-              <p class="project-description">
-                Implementação da arquitetura Medallion (Bronze, Silver, Gold) no Google Cloud Storage + BigQuery, com Terraform para infraestrutura como código e políticas de governança de dados.
-              </p>
-
-              <div class="project-tags" aria-label="Tecnologias usadas">
-                <span class="tag">GCP</span>
-                <span class="tag">Terraform</span>
-                <span class="tag">BigQuery</span>
-                <span class="tag">Medallion</span>
-              </div>
-
-              <a href="https://github.com/hudsonlenz/data-lake-gcp" target="_blank" rel="noopener noreferrer"
-                 class="project-cta" aria-label="Ver projeto completo no GitHub">
-                Ver Projeto
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Projeto 6 -->
-        <article class="project-card reveal-item" aria-label="Projeto: Marketing Analytics">
-          <div class="project-card-inner">
-            <div class="project-preview" aria-hidden="true">
-              <div class="project-preview-icon">
-                <i class="fas fa-bullseye"></i>
-              </div>
-              <div class="project-preview-bg"></div>
-            </div>
-
-            <div class="project-content">
-              <div class="project-meta">
-                <span class="project-category">SQL · Marketing Analytics</span>
-                <a href="https://github.com/hudsonlenz/marketing-analytics" target="_blank" rel="noopener noreferrer"
-                   class="project-github-link" aria-label="Ver código no GitHub">
-                  <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-              </div>
-
-              <h3 class="project-title">Marketing Analytics & Attribution</h3>
-
-              <p class="project-description">
-                Modelo de atribuição multi-touch para campanhas de marketing digital com análise de funil, cálculo de ROAS e CAC. Queries SQL avançadas com window functions e análise cohort.
-              </p>
-
-              <div class="project-tags" aria-label="Tecnologias usadas">
-                <span class="tag">SQL</span>
-                <span class="tag">BigQuery</span>
-                <span class="tag">Power BI</span>
-                <span class="tag">Attribution</span>
-              </div>
-
-              <a href="https://github.com/hudsonlenz/marketing-analytics" target="_blank" rel="noopener noreferrer"
-                 class="project-cta" aria-label="Ver projeto completo no GitHub">
-                Ver Projeto
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-
-      </div><!-- /projects-grid -->
-
-      <!-- Link para todos os repositórios -->
-      <div class="projects-footer reveal-item">
-        <a href="https://github.com/hudsonlenz" target="_blank" rel="noopener noreferrer"
-           class="btn btn--ghost" aria-label="Ver todos os projetos no GitHub">
-          <i class="fab fa-github" aria-hidden="true"></i>
-          Ver todos no GitHub
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CONTATO
-  ============================================================ -->
-  <section class="contact section section--alt" id="contact" aria-label="Entre em contato">
-    <div class="container">
-      <!-- Cabeçalho -->
-      <div class="section-header reveal-item">
-        <span class="section-tag">04 — Contato</span>
-        <h2 class="section-title">Vamos Conversar?</h2>
-      </div>
-
-      <div class="contact-grid">
-        <!-- Info lateral -->
-        <div class="contact-info reveal-item">
-          <p class="contact-lead">
-            Estou aberto a novos projetos, oportunidades e desafios na área de dados. Vamos conversar!
-          </p>
-
-          <!-- Links de contato direto -->
-          <ul class="contact-links" aria-label="Informações de contato">
-            <li class="contact-link-item">
-              <a href="mailto:hudson.lenz@hotmail.com" class="contact-link-row" aria-label="Enviar email para hudson.lenz@hotmail.com">
-                <span class="contact-link-icon" aria-hidden="true"><i class="fas fa-envelope"></i></span>
-                <span class="contact-link-text">hudson.lenz@hotmail.com</span>
-              </a>
-            </li>
-            <li class="contact-link-item">
-              <a href="https://www.linkedin.com/in/hudsonrausch/" target="_blank" rel="noopener noreferrer"
-                 class="contact-link-row" aria-label="Perfil no LinkedIn">
-                <span class="contact-link-icon" aria-hidden="true"><i class="fab fa-linkedin-in"></i></span>
-                <span class="contact-link-text">linkedin.com/in/hudsonrausch</span>
-              </a>
-            </li>
-            <li class="contact-link-item">
-              <a href="https://github.com/hudsonlenz" target="_blank" rel="noopener noreferrer"
-                 class="contact-link-row" aria-label="Perfil no GitHub">
-                <span class="contact-link-icon" aria-hidden="true"><i class="fab fa-github"></i></span>
-                <span class="contact-link-text">github.com/hudsonlenz</span>
-              </a>
-            </li>
-          </ul>
-
-          <!-- Ícones sociais -->
-          <div class="social-icons" aria-label="Redes sociais">
-            <a href="https://github.com/hudsonlenz"    target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/hudsonrausch/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-            <a href="https://www.instagram.com/hudsonl_rausch/" class="social-icon" aria-label="Instagram"> <i class="fab fa-instagram"></i></a>
-            <a href="mailto:hudson.lenz@hotmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-          </div>
-        </div>
-
-        <!-- Formulário -->
-        <div class="contact-form-wrap reveal-item">
-          <form class="contact-form" id="contactForm" novalidate aria-label="Formulário de contato">
-            <!-- Feedback de envio -->
-            <div class="form-feedback" id="formFeedback" role="alert" aria-live="polite"></div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="inputName" class="form-label">Nome</label>
-                <input type="text" id="inputName" name="name" class="form-input"
-                       placeholder="Seu nome completo"
-                       autocomplete="name" required
-                       aria-required="true" />
-              </div>
-              <div class="form-group">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" id="inputEmail" name="email" class="form-input"
-                       placeholder="seu@email.com"
-                       autocomplete="email" required
-                       aria-required="true" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="inputSubject" class="form-label">Assunto</label>
-              <input type="text" id="inputSubject" name="subject" class="form-input"
-                     placeholder="Sobre o que você quer conversar?"
-                     required aria-required="true" />
-            </div>
-
-            <div class="form-group">
-              <label for="inputMessage" class="form-label">Mensagem</label>
-              <textarea id="inputMessage" name="message" class="form-input form-textarea"
-                        placeholder="Descreva seu projeto ou ideia..."
-                        rows="5" required aria-required="true"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn--primary form-submit" aria-label="Enviar mensagem">
-              <span class="btn-text">Enviar Mensagem</span>
-              <i class="fas fa-paper-plane btn-icon" aria-hidden="true"></i>
-            </button>
-          </form>
-        </div>
-
-      </div><!-- /contact-grid -->
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Brand -->
-        <div class="footer-brand">
-          <a href="#hero" class="footer-logo" aria-label="Ir para o topo">
-            <span class="logo-initials">HLR</span>
-            <span class="logo-name">Hudson L. Rausch</span>
-          </a>
-          <p class="footer-tagline">Transformando dados em decisões estratégicas.</p>
-        </div>
-
-        <!-- Links rápidos -->
-        <nav class="footer-nav" aria-label="Links rápidos do rodapé">
-          <h4 class="footer-nav-title">Navegação</h4>
-          <ul class="footer-nav-list">
-            <li><a href="#about"    class="footer-link">Sobre</a></li>
-            <li><a href="#skills"   class="footer-link">Skills</a></li>
-            <li><a href="#projects" class="footer-link">Projetos</a></li>
-            <li><a href="#contact"  class="footer-link">Contato</a></li>
-          </ul>
-        </nav>
-
-        <!-- Redes sociais -->
-        <div class="footer-social">
-          <h4 class="footer-nav-title">Redes</h4>
-          <div class="footer-social-icons" aria-label="Redes sociais">
-            <a href="https://github.com/hudsonlenz"     target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/hudsonrausch/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-            <a href="hudson.lenz@hotmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="footer-bottom">
-        <p class="footer-copy">
-          &copy; <span id="footerYear"></span> Hudson L. Rausch. Feito com
-          <span aria-hidden="true">&#9829;</span><span class="sr-only">dedicação</span>
-          e dados.
-        </p>
-        <p class="footer-made">
-          <a href="https://github.com/hudsonlenz/portfolio" target="_blank" rel="noopener noreferrer"
-             class="footer-link" aria-label="Ver código-fonte do portfólio">
-            <i class="fab fa-github" aria-hidden="true"></i> Código-fonte
-          </a>
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============================================================
-       BOTÃO VOLTAR AO TOPO
-  ============================================================ -->
-  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo da página" title="Voltar ao topo">
-    <i class="fas fa-chevron-up" aria-hidden="true"></i>
-  </button>
-
-  <!-- ============================================================
-       SCRIPT PRINCIPAL
-  ============================================================ -->
-  <script src="script.js"></script>
 </body>
 </html>
