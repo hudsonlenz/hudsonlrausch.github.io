@@ -666,3 +666,45 @@ function initLanguage() {
     applyLanguage(currentLang);
   });
 }
+
+/* ============================================================
+   LIGHTBOX / GALERIA
+============================================================ */
+(function () {
+  const lightbox   = document.getElementById('lightbox');
+  const img        = document.getElementById('lightbox-img');
+  const titleEl    = document.getElementById('lightbox-title');
+  const githubLink = document.getElementById('lightbox-github-link');
+  const backdrop   = lightbox.querySelector('.lightbox-backdrop');
+  const closeBtn   = document.getElementById('lightbox-close');
+
+  function openLightbox(btn) {
+    img.src          = btn.dataset.img   || '';
+    img.alt          = btn.dataset.title || 'Imagem do projeto';
+    titleEl.textContent = btn.dataset.title || '';
+    githubLink.href  = btn.dataset.github || '#';
+    lightbox.hidden  = false;
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden  = true;
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  // Card inteiro como gatilho — ignora cliques no link do GitHub
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.project-github-link')) return;
+    const card = e.target.closest('[data-lightbox]');
+    if (card) openLightbox(card);
+  });
+
+  backdrop.addEventListener('click', closeLightbox);
+  closeBtn.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  });
+})();
