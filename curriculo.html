@@ -763,10 +763,29 @@
         { code: 'de', label: '🇩🇪 Deutsch'   },
       ];
 
+      function getActiveLang() {
+        const m = document.cookie.match(/googtrans=\/pt\/([a-z]+)/);
+        return m ? m[1] : 'pt';
+      }
+
+      function setLang(lang) {
+        const domains = [location.hostname, '.' + location.hostname, ''];
+        domains.forEach(d => {
+          document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${d}`;
+        });
+        if (lang !== 'pt') {
+          const val = `/pt/${lang}`;
+          document.cookie = `googtrans=${val}; path=/`;
+          document.cookie = `googtrans=${val}; path=/; domain=.${location.hostname}`;
+        }
+        location.reload();
+      }
+
+      const activeLang = getActiveLang();
       const dropdown = document.createElement('div');
       dropdown.id = 'translate-dropdown';
       dropdown.innerHTML = langs.map(l =>
-        `<button class="translate-option" data-lang="${l.code}">${l.label}</button>`
+        `<button class="translate-option${l.code === activeLang ? ' active' : ''}" data-lang="${l.code}">${l.label}</button>`
       ).join('');
       document.body.appendChild(dropdown);
 
@@ -790,24 +809,7 @@
       dropdown.addEventListener('click', function(e) {
         const target = e.target.closest('.translate-option');
         if (!target) return;
-        const lang = target.dataset.lang;
-        dropdown.classList.remove('open');
-        dropdown.querySelectorAll('.translate-option').forEach(b => b.classList.remove('active'));
-        target.classList.add('active');
-
-        if (lang === 'pt') {
-          const select = document.querySelector('.goog-te-combo');
-          if (select) { select.value = lang; select.dispatchEvent(new Event('change')); }
-          const cookie = document.cookie.match(/googtrans=([^;]+)/);
-          if (cookie) {
-            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname + ';';
-            location.reload();
-          }
-        } else {
-          const select = document.querySelector('.goog-te-combo');
-          if (select) { select.value = lang; select.dispatchEvent(new Event('change')); }
-        }
+        setLang(target.dataset.lang);
       });
     })();
   </script>
