@@ -896,12 +896,34 @@
         { code: 'de', label: '🇩🇪 Deutsch'   },
       ];
 
+      // Detecta idioma ativo via cookie
+      function getActiveLang() {
+        const m = document.cookie.match(/googtrans=\/pt\/([a-z]+)/);
+        return m ? m[1] : 'pt';
+      }
+
+      // Aplica tradução via cookie googtrans + reload
+      function setLang(lang) {
+        // Limpa cookies anteriores
+        const domains = [location.hostname, '.' + location.hostname, ''];
+        domains.forEach(d => {
+          document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${d}`;
+        });
+        if (lang !== 'pt') {
+          const val = `/pt/${lang}`;
+          document.cookie = `googtrans=${val}; path=/`;
+          document.cookie = `googtrans=${val}; path=/; domain=.${location.hostname}`;
+        }
+        location.reload();
+      }
+
       // Cria o dropdown
+      const activeLang = getActiveLang();
       const dropdown = document.createElement('div');
       dropdown.id = 'translate-dropdown';
       dropdown.setAttribute('aria-label', 'Selecionar idioma');
       dropdown.innerHTML = langs.map(l =>
-        `<button class="translate-option" data-lang="${l.code}">${l.label}</button>`
+        `<button class="translate-option${l.code === activeLang ? ' active' : ''}" data-lang="${l.code}">${l.label}</button>`
       ).join('');
       document.body.appendChild(dropdown);
 
@@ -912,9 +934,8 @@
         e.stopPropagation();
         const open = dropdown.classList.toggle('open');
         btn.classList.toggle('open', open);
-        // Posiciona abaixo do botão
         const rect = btn.getBoundingClientRect();
-        dropdown.style.top  = (rect.bottom + 8) + 'px';
+        dropdown.style.top   = (rect.bottom + 8) + 'px';
         dropdown.style.right = (window.innerWidth - rect.right) + 'px';
       });
 
@@ -924,36 +945,11 @@
         btn.classList.remove('open');
       });
 
-      // Aplica tradução
+      // Aplica tradução ao clicar numa opção
       dropdown.addEventListener('click', function(e) {
         const target = e.target.closest('.translate-option');
         if (!target) return;
-        const lang = target.dataset.lang;
-        dropdown.classList.remove('open');
-
-        // Marca opção ativa
-        dropdown.querySelectorAll('.translate-option').forEach(b => b.classList.remove('active'));
-        target.classList.add('active');
-
-        if (lang === 'pt') {
-          // Restaura idioma original
-          const frame = document.querySelector('.goog-te-banner-frame');
-          const select = document.querySelector('.goog-te-combo');
-          if (select) { select.value = lang; select.dispatchEvent(new Event('change')); }
-          // Fallback: recarrega sem cookie de tradução
-          const cookie = document.cookie.match(/googtrans=([^;]+)/);
-          if (cookie) {
-            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname + ';';
-            location.reload();
-          }
-        } else {
-          const select = document.querySelector('.goog-te-combo');
-          if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event('change'));
-          }
-        }
+        setLang(target.dataset.lang);
       });
     })();
   </script>
