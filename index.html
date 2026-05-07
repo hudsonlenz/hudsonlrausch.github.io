@@ -83,7 +83,10 @@
       <div class="nav-controls">
 
         <!-- Google Translate -->
-        <div id="google_translate_element" aria-label="Traduzir página"></div>
+        <div id="google_translate_element" style="display:none" aria-hidden="true"></div>
+        <button class="theme-toggle translate-btn" id="translateBtn" aria-label="Traduzir página" title="Translate page">
+          <i class="fas fa-globe" aria-hidden="true"></i>
+        </button>
 
         <!-- Toggle Dark/Light Mode -->
         <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro" title="Alternar tema">
@@ -866,6 +869,7 @@
   <!-- ============================================================
        GOOGLE TRANSLATE
   ============================================================ -->
+  <!-- Widget oculto — necessário para inicializar a API -->
   <script>
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -878,59 +882,124 @@
   </script>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+  <script>
+    // Dropdown de idiomas customizado
+    (function() {
+      const langs = [
+        { code: 'pt', label: '🇧🇷 Português' },
+        { code: 'en', label: '🇬🇧 English'   },
+        { code: 'es', label: '🇪🇸 Español'   },
+        { code: 'nl', label: '🇳🇱 Nederlands' },
+        { code: 'fr', label: '🇫🇷 Français'  },
+        { code: 'de', label: '🇩🇪 Deutsch'   },
+      ];
+
+      // Cria o dropdown
+      const dropdown = document.createElement('div');
+      dropdown.id = 'translate-dropdown';
+      dropdown.setAttribute('aria-label', 'Selecionar idioma');
+      dropdown.innerHTML = langs.map(l =>
+        `<button class="translate-option" data-lang="${l.code}">${l.label}</button>`
+      ).join('');
+      document.body.appendChild(dropdown);
+
+      const btn = document.getElementById('translateBtn');
+
+      // Toggle do dropdown
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = dropdown.classList.toggle('open');
+        // Posiciona abaixo do botão
+        const rect = btn.getBoundingClientRect();
+        dropdown.style.top  = (rect.bottom + 8) + 'px';
+        dropdown.style.right = (window.innerWidth - rect.right) + 'px';
+      });
+
+      // Fecha ao clicar fora
+      document.addEventListener('click', () => dropdown.classList.remove('open'));
+
+      // Aplica tradução
+      dropdown.addEventListener('click', function(e) {
+        const target = e.target.closest('.translate-option');
+        if (!target) return;
+        const lang = target.dataset.lang;
+        dropdown.classList.remove('open');
+
+        // Marca opção ativa
+        dropdown.querySelectorAll('.translate-option').forEach(b => b.classList.remove('active'));
+        target.classList.add('active');
+
+        if (lang === 'pt') {
+          // Restaura idioma original
+          const frame = document.querySelector('.goog-te-banner-frame');
+          const select = document.querySelector('.goog-te-combo');
+          if (select) { select.value = lang; select.dispatchEvent(new Event('change')); }
+          // Fallback: recarrega sem cookie de tradução
+          const cookie = document.cookie.match(/googtrans=([^;]+)/);
+          if (cookie) {
+            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + location.hostname + ';';
+            location.reload();
+          }
+        } else {
+          const select = document.querySelector('.goog-te-combo');
+          if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event('change'));
+          }
+        }
+      });
+    })();
+  </script>
+
   <style>
-    /* ── Google Translate — integração visual ── */
-    #google_translate_element {
-      display: flex;
-      align-items: center;
-    }
-    #google_translate_element .goog-te-gadget {
-      font-family: inherit !important;
-      font-size: 0 !important;
-      color: transparent !important;
-    }
-    #google_translate_element .goog-te-gadget-simple {
-      background: transparent !important;
-      border: 1px solid rgba(212,168,67,0.4) !important;
-      border-radius: 9999px !important;
-      padding: 0.3rem 0.75rem !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.3rem !important;
-      cursor: pointer !important;
-      transition: border-color 250ms ease, background 250ms ease;
-    }
-    #google_translate_element .goog-te-gadget-simple:hover {
-      border-color: rgba(212,168,67,0.8) !important;
-      background: rgba(212,168,67,0.08) !important;
-    }
-    #google_translate_element .goog-te-gadget-simple .goog-te-menu-value {
-      color: var(--accent, #d4a843) !important;
-      font-size: 0.78rem !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.04em !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.25rem !important;
-    }
-    #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span:last-child {
-      display: none !important; /* esconde o "▼" padrão */
-    }
-    #google_translate_element .goog-te-gadget-simple .goog-te-menu-value::after {
-      content: '\f1ab';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      font-size: 0.72rem;
-      color: var(--accent, #d4a843);
-      margin-left: 0.2rem;
-    }
-    /* Esconde o banner superior do Google Translate */
+    /* ── Widget nativo — oculto completamente ── */
+    #google_translate_element,
     .goog-te-banner-frame,
-    .skiptranslate > iframe {
-      display: none !important;
+    .skiptranslate > iframe { display: none !important; }
+    body { top: 0 !important; }
+
+    /* ── Botão de tradução ── */
+    .translate-btn {
+      position: relative;
     }
-    body {
-      top: 0 !important;
+
+    /* ── Dropdown customizado ── */
+    #translate-dropdown {
+      position: fixed;
+      z-index: 9999;
+      background: var(--bg-card, #111113);
+      border: 1px solid var(--border-a, rgba(212,168,67,0.28));
+      border-radius: 12px;
+      padding: 0.4rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 160px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    #translate-dropdown.open { display: flex; }
+
+    .translate-option {
+      background: transparent;
+      border: none;
+      color: var(--text, #f0ede8);
+      font-family: var(--font-b, 'DM Sans', sans-serif);
+      font-size: 0.82rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 150ms ease, color 150ms ease;
+      white-space: nowrap;
+    }
+    .translate-option:hover {
+      background: var(--accent-dim, rgba(212,168,67,0.10));
+      color: var(--accent, #d4a843);
+    }
+    .translate-option.active {
+      color: var(--accent, #d4a843);
+      font-weight: 600;
     }
   </style>
 </body>
