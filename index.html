@@ -84,8 +84,10 @@
 
         <!-- Google Translate -->
         <div id="google_translate_element" style="display:none" aria-hidden="true"></div>
-        <button class="theme-toggle translate-btn" id="translateBtn" aria-label="Traduzir página" title="Translate page">
+        <button class="btn-language" id="translateBtn" aria-label="Select language">
           <i class="fas fa-globe" aria-hidden="true"></i>
+          <span>Language</span>
+          <i class="fas fa-chevron-down btn-language-caret" aria-hidden="true"></i>
         </button>
 
         <!-- Toggle Dark/Light Mode -->
@@ -909,6 +911,7 @@
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         const open = dropdown.classList.toggle('open');
+        btn.classList.toggle('open', open);
         // Posiciona abaixo do botão
         const rect = btn.getBoundingClientRect();
         dropdown.style.top  = (rect.bottom + 8) + 'px';
@@ -916,7 +919,10 @@
       });
 
       // Fecha ao clicar fora
-      document.addEventListener('click', () => dropdown.classList.remove('open'));
+      document.addEventListener('click', () => {
+        dropdown.classList.remove('open');
+        btn.classList.remove('open');
+      });
 
       // Aplica tradução
       dropdown.addEventListener('click', function(e) {
@@ -959,9 +965,36 @@
     .skiptranslate > iframe { display: none !important; }
     body { top: 0 !important; }
 
-    /* ── Botão de tradução ── */
-    .translate-btn {
-      position: relative;
+    /* ── Botão Language ── */
+    .btn-language {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.42rem 0.9rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-a, rgba(212,168,67,0.35));
+      background: transparent;
+      color: var(--accent, #d4a843);
+      font-family: var(--font-b, 'DM Sans', sans-serif);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+      white-space: nowrap;
+    }
+    .btn-language:hover {
+      background: var(--accent-dim, rgba(212,168,67,0.10));
+      border-color: var(--accent, #d4a843);
+      transform: translateY(-1px);
+    }
+    .btn-language-caret {
+      font-size: 0.6rem;
+      opacity: 0.7;
+      transition: transform 200ms ease;
+    }
+    .btn-language.open .btn-language-caret {
+      transform: rotate(180deg);
     }
 
     /* ── Dropdown customizado ── */
